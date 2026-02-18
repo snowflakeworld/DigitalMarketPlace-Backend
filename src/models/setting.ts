@@ -1,5 +1,6 @@
-import { Entity } from '@types';
 import { Document, model, Schema } from 'mongoose';
+
+import { Entity } from '@types';
 
 export interface ISetting extends Entity {
   key: string;

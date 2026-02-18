@@ -1,5 +1,6 @@
-import { IUser, IUserDocument, UserModel } from '@models';
 import { Types } from 'mongoose';
+
+import { IUser, IUserDocument, UserModel } from '@models';
 
 export const createUser = async (
   email: string,

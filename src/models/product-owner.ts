@@ -1,5 +1,6 @@
-import { Entity } from '@types';
 import { Document, model, Schema, Types } from 'mongoose';
+
+import { Entity } from '@types';
 
 export interface IProductOwner extends Entity {
   productId: Types.ObjectId;

@@ -1,5 +1,6 @@
-import { Entity, EventType } from '@types';
 import { Document, model, Schema, Types } from 'mongoose';
+
+import { Entity, EventType } from '@types';
 
 export interface IProductEvent extends Entity {
   productId: Types.ObjectId;

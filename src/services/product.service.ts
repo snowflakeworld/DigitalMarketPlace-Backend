@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 import {
   IProduct,
   IProductDocument,
@@ -8,7 +10,6 @@ import {
 } from '@models';
 import { IProductEventDocument, ProductEventModel } from '@models/product-event';
 import { EventType } from '@types';
-import { Types } from 'mongoose';
 
 export const createProduct = async (
   name: string,
