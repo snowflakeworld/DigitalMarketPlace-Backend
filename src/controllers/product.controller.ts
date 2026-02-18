@@ -2,12 +2,16 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 
 import { AuthRequest } from '@middlewares';
+import { ProductModel } from '@models';
+import { createProduct, createProductEvent, createProductOwner, updateProductOwner } from '@services/product.service';
 import { createUser, getUserByEmail } from '@services/user.service';
 import { ApiError, catchAsync } from '@utils';
 
-export const getProducts = catchAsync(async (req: AuthRequest, res: Response) => {
+export const getProducts = catchAsync(async (_: AuthRequest, res: Response) => {
   try {
-    return res.send({});
+    const data = await ProductModel.find({ status: true }).sort({ createdAt: -1 }).exec();
+
+    return res.send(data);
   } catch (error) {
     console.error('Error during signin:', error.message);
     if (error instanceof ApiError) {
@@ -20,7 +24,18 @@ export const getProducts = catchAsync(async (req: AuthRequest, res: Response) =>
 
 export const listProduct = catchAsync(async (req: AuthRequest, res: Response) => {
   try {
-    return res.send({});
+    const { address, name, description, price, image, ipfsHash } = req.body;
+
+    // Insert Product Item
+    const savedProduct = await createProduct(name, description, image, price, ipfsHash);
+
+    // Insert Product Owner
+    await createProductOwner(savedProduct._id, address);
+
+    // Insert Product Event
+    await createProductEvent(savedProduct._id, 'list', address);
+
+    return res.send(savedProduct);
   } catch (error) {
     console.error('Error during signin:', error.message);
     if (error instanceof ApiError) {
@@ -33,7 +48,15 @@ export const listProduct = catchAsync(async (req: AuthRequest, res: Response) =>
 
 export const purchaseProduct = catchAsync(async (req: AuthRequest, res: Response) => {
   try {
-    return res.send({});
+    const { productId, address } = req.body;
+
+    // Change Product Owner
+    await updateProductOwner(productId, address);
+
+    // Insert Product Event
+    await createProductEvent(productId, 'purchase', address);
+
+    return res.send({ success: true });
   } catch (error) {
     console.error('Error during signin:', error.message);
     if (error instanceof ApiError) {
@@ -46,7 +69,15 @@ export const purchaseProduct = catchAsync(async (req: AuthRequest, res: Response
 
 export const transferOwnership = catchAsync(async (req: AuthRequest, res: Response) => {
   try {
-    return res.send({});
+    const { productId, address } = req.body;
+
+    // Change Product Owner
+    const doc = await updateProductOwner(productId, address);
+
+    // Insert Product Event
+    await createProductEvent(productId, 'purchase', doc.address, address);
+
+    return res.send({ success: true });
   } catch (error) {
     console.error('Error during signin:', error.message);
     if (error instanceof ApiError) {
