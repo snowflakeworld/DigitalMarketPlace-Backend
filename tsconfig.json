@@ -8,6 +8,7 @@
       "@middlewares": ["middlewares/index"],
       "@types": ["types/index"],
       "@models": ["models/index"],
+      "@models/*": ["models/*"],
       "@services/*": ["services/*"],
       "@utils": ["utils/index"],
       "@config": ["config/index"],
