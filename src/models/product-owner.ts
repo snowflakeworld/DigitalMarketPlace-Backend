@@ -16,4 +16,4 @@ const ModelSchema = new Schema<IProductOwnerDocument>({
   ownerCount: { type: Number, required: true, default: 1 }
 });
 
-export const ProductOwnerModel = model<IProductOwnerDocument>('product_owner', ModelSchema);
+export const ProductOwnerModel = model<IProductOwnerDocument>('product_owners', ModelSchema);

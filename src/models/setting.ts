@@ -18,11 +18,11 @@ const ModelSchema = new Schema<ISettingDocument>(
     timestamps: true,
     toObject: {
       getters: true,
-      virtuals: true,
+      virtuals: false,
       versionKey: false
     },
     toJSON: {
-      virtuals: true,
+      virtuals: false,
       versionKey: false,
       transform: function (_, ret) {
         return ret;
@@ -31,4 +31,4 @@ const ModelSchema = new Schema<ISettingDocument>(
   }
 );
 
-export const SettingModel = model<ISettingDocument>('setting', ModelSchema);
+export const SettingModel = model<ISettingDocument>('settings', ModelSchema);

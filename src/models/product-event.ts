@@ -22,4 +22,4 @@ const ModelSchema = new Schema<IProductEventDocument>({
   toAddress: { type: String }
 });
 
-export const ProductEventModel = model<IProductEventDocument>('product_event', ModelSchema);
+export const ProductEventModel = model<IProductEventDocument>('product_events', ModelSchema);
