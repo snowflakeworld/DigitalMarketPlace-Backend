@@ -25,6 +25,8 @@ export const signIn = catchAsync(async (req: Request, res: Response) => {
       email: user.email
     };
 
+    delete user.password;
+
     const token = jwt.sign(payload, config.jwt.secret, { expiresIn: config.jwt.lifetime });
 
     return res.send({ token, user });
@@ -49,6 +51,8 @@ export const signUp = catchAsync(async (req: Request, res: Response) => {
     }
 
     const savedUser = await createUser(email, password, name, 'user');
+
+    delete savedUser.password;
 
     return res.send({ ...savedUser });
   } catch (error) {

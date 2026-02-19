@@ -27,11 +27,11 @@ const ModelSchema = new Schema<IUserDocument>(
     timestamps: true,
     toObject: {
       getters: true,
-      virtuals: true,
-      versionKey: false
+      virtuals: false,
+      versionKey: false,
     },
     toJSON: {
-      virtuals: true,
+      virtuals: false,
       versionKey: false,
       transform: function (_, ret) {
         delete ret.password;

@@ -13,9 +13,9 @@ export const createUser = async (
 };
 
 export const getUserById = async (id: Types.ObjectId | string): Promise<IUser | null> => {
-  return await UserModel.findById(id).lean();
+  return await UserModel.findById(id);
 };
 
 export const getUserByEmail = async (email: string): Promise<IUser | null> => {
-  return await UserModel.findOne({ email }).lean();
+  return await UserModel.findOne({ email });
 };

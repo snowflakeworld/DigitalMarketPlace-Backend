@@ -20,7 +20,7 @@ export const createProduct = async (
   status: boolean = true
 ): Promise<IProductDocument> => {
   const productDoc = new ProductModel({ name, description, image, price, ipfsHash, status });
-  return (await productDoc.save()).toObject();
+  return await productDoc.save();
 };
 
 export const createProductOwner = async (
@@ -29,7 +29,7 @@ export const createProductOwner = async (
   ownerCount: number = 1
 ): Promise<IProductOwnerDocument> => {
   const ownerDoc = new ProductOwnerModel({ productId, address, ownerCount });
-  return (await ownerDoc.save()).toObject();
+  return await ownerDoc.save();
 };
 
 export const createProductEvent = async (
@@ -39,7 +39,7 @@ export const createProductEvent = async (
   toAddress?: string
 ): Promise<IProductEventDocument> => {
   const eventDoc = new ProductEventModel({ productId, type, fromAddress, ...(toAddress ? { toAddress } : {}) });
-  return (await eventDoc.save()).toObject();
+  return await eventDoc.save();
 };
 
 export const getProductById = async (id: Types.ObjectId | string): Promise<IProduct | null> => {
