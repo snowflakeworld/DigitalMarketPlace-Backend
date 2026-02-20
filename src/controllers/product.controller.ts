@@ -100,7 +100,7 @@ export const transferOwnership = catchAsync(async (req: AuthRequest, res: Respon
     const doc = await updateProductOwner(productObjectId, address);
 
     // Insert Product Event
-    await createProductEvent(productObjectId, 'purchase', doc.address, address);
+    await createProductEvent(productObjectId, 'transfer', doc.address, address);
 
     return res.send({ success: true });
   } catch (error) {
