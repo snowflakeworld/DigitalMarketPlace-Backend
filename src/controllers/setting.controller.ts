@@ -12,7 +12,7 @@ export const getSetting = catchAsync(async (_: AuthRequest, res: Response) => {
 
     return res.send(data);
   } catch (error) {
-    console.error('Error during signin:', error.message);
+    console.error('Error during get setting:', error.message);
     if (error instanceof ApiError) {
       return res.status(error.statusCode).json(error.message);
     } else {
@@ -29,7 +29,7 @@ export const addSetting = catchAsync(async (req: AuthRequest, res: Response) => 
 
     return res.send(savedSetting);
   } catch (error) {
-    console.error('Error during signin:', error.message);
+    console.error('Error during add setting:', error.message);
     if (error instanceof ApiError) {
       return res.status(error.statusCode).json(error.message);
     } else {
@@ -47,7 +47,7 @@ export const modifySetting = catchAsync(async (req: AuthRequest, res: Response) 
 
     return res.send(savedSetting);
   } catch (error) {
-    console.error('Error during signin:', error.message);
+    console.error('Error during modify setting:', error.message);
     if (error instanceof ApiError) {
       return res.status(error.statusCode).json(error.message);
     } else {

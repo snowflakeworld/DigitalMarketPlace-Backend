@@ -15,6 +15,8 @@ const envVarsSchema = Joi.object()
     JWT_SECRET: Joi.string().required().description('JWT secret key'),
     JWT_LIFETIME: Joi.string().required().default('1h').description('JWT Lifetime'),
 
+    PINATA_JWT_SECRET: Joi.string().required().description('Pinata JWT secret key'),
+
     MEDIA_BUCKET: Joi.string().required().description('MEDIA BUCKET')
   })
   .unknown();
@@ -35,6 +37,10 @@ export default {
   jwt: {
     secret: envVars.JWT_SECRET,
     lifetime: envVars.JWT_LIFETIME
+  },
+
+  pinata: {
+    jwt: envVars.PINATA_JWT_SECRET
   },
 
   media: {

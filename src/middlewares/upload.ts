@@ -3,7 +3,8 @@ import path from 'path';
 
 import configs from '@config';
 
-const baseDir: string = process.cwd();
+// const baseDir: string = process.cwd();
+const baseDir: string = 'C:/xampp/htdocs/digitalmarket';
 
 // store uploaded files in media folder
 const storage = multer.diskStorage({
@@ -16,4 +17,4 @@ const storage = multer.diskStorage({
   }
 });
 
-export const uploadAvatar = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
+export const uploadImage = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
