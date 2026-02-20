@@ -81,7 +81,6 @@ export const getProductList = async ({
   }
 
   const pipeline: PipelineStage[] = [
-    { $match: query },
     {
       $lookup: {
         from: 'product_owners',
@@ -109,6 +108,7 @@ export const getProductList = async ({
         ownerCount: '$productOwners.ownerCount'
       }
     },
+    { $match: query },
     {
       $sort: { createdAt: -1 }
     },
@@ -122,7 +122,7 @@ export const getProductList = async ({
 
   const [data, total] = await Promise.all([
     ProductModel.aggregate(pipeline).exec(),
-    ProductModel.countDocuments(query)
+    ProductOwnerModel.countDocuments(query)
   ]);
 
   return { data, total, totalPages: Math.ceil(total / limit) };
