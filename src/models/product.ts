@@ -43,6 +43,4 @@ const ModelSchema = new Schema<IProductDocument>(
   }
 );
 
-ModelSchema.index({ productId: 1 });
-
 export const ProductModel = model<IProductDocument>('products', ModelSchema);

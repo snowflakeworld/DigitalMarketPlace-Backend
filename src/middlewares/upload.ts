@@ -3,8 +3,8 @@ import path from 'path';
 
 import configs from '@config';
 
-// const baseDir: string = process.cwd();
-const baseDir: string = 'C:/xampp/htdocs/digitalmarket';
+const baseDir: string = process.cwd();
+// const baseDir: string = 'C:/xampp/htdocs/digitalmarket';
 
 // store uploaded files in media folder
 const storage = multer.diskStorage({

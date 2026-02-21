@@ -1,23 +1,10 @@
 import http from 'http';
-import mongoose from 'mongoose';
 
 import appServer from './app';
 import config from './config';
 import logger from './config/logger';
 
 const main = async (): Promise<void> => {
-  try {
-    mongoose.set('strictQuery', true);
-
-    // Connect to MongoDB
-    await mongoose.connect(config.mongodbURL);
-    logger.info('-- Database connection successful');
-  } catch (error) {
-    logger.error('-- Error connecting to database');
-    logger.error(error);
-    process.exit(1);
-  }
-
   // Start Server
   const server: http.Server = appServer.listen(config.port, () => {
     logger.info(`Server listening on port ${config.port}`);
