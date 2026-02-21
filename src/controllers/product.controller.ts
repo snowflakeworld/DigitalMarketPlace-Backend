@@ -122,7 +122,10 @@ export const uploadProductImage = catchAsync(async (req: AuthRequest, res: Respo
     const fileName = req.file.filename;
     const filePath = req.file.path;
 
-    const file = new File([fs.readFileSync(filePath)], fileName);
+    fs.chmodSync(filePath, 0o644);
+
+    const fileData = fs.readFileSync(filePath);
+    const file = new File([fileData], fileName, { type: req.file.mimetype });
     const upload = await pinata.upload.public.file(file);
 
     // Upload to Pinata
