@@ -15,6 +15,7 @@ const errorConverter = (err: any, _: Request, __: Response, next: NextFunction) 
         ? HttpStatusCodes.BAD_REQUEST
         : HttpStatusCodes.INTERNAL_SERVER_ERROR;
     const message = error.message || HttpStatusCodes[statusCode];
+
     error = new ApiError(statusCode, message, false, err.stack);
   }
 
@@ -24,6 +25,7 @@ const errorConverter = (err: any, _: Request, __: Response, next: NextFunction) 
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (err: any, _: Request, res: Response, __: NextFunction) => {
   let { statusCode, message } = err;
+
   if (config.env === 'production' && !err.isOperational) {
     statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR;
     message = HttpStatusCodes[HttpStatusCodes.INTERNAL_SERVER_ERROR];
