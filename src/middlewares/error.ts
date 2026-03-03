@@ -15,7 +15,6 @@ const errorConverter = (err: any, _: Request, __: Response, next: NextFunction) 
         ? HttpStatusCodes.BAD_REQUEST
         : HttpStatusCodes.INTERNAL_SERVER_ERROR;
     const message = error.message || HttpStatusCodes[statusCode];
-
     error = new ApiError(statusCode, message, false, err.stack);
   }
 
@@ -49,7 +48,6 @@ const errorHandler = (err: any, _: Request, res: Response, __: NextFunction) => 
 
 const errorBotHandler = (err: any) => {
   const e = err.error;
-
   if (e instanceof GrammyError) console.error('Error in request:', e.description);
   else if (e instanceof HttpError) console.error('Could not contact Telegram:', e);
   else console.error('Unknown error:', e);
