@@ -13,6 +13,7 @@ export const getJwtStrategy = () => {
   return new JwtStrategy(opts, async (payload, done) => {
     try {
       const user = await getUserById(payload.id);
+
       return done(null, user ?? false);
     } catch (error) {
       return done(error, false);

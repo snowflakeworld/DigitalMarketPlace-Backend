@@ -17,6 +17,7 @@ const errorConverter = (err: any, _: Request, __: Response, next: NextFunction) 
     const message = error.message || HttpStatusCodes[statusCode];
     error = new ApiError(statusCode, message, false, err.stack);
   }
+
   next(error);
 };
 
@@ -39,6 +40,7 @@ const errorHandler = (err: any, _: Request, res: Response, __: NextFunction) => 
   if (config.env === 'development') {
     logger.error(err);
   }
+
   console.log('send error: ' + statusCode + ' ' + JSON.stringify(response));
   res.status(statusCode).send(response);
 };
